@@ -20,14 +20,12 @@ app.route('/').get((req, res) => {
 });
 
 //import routes
-// const userAPI = require('./src/api/user.api');
-// const foodOfficerAPI = require('./src/api/foodOfficer.api');
-// const familyAssign = require('./src/api/assignFamily');
+
+const userAPI = require('./src/api/user.api');
 
 // Define routes
-// app.use('/user', userAPI());
-// app.use('/foodOfficer', foodOfficerAPI());
-// app.use('/Family', familyAssign());
+app.use('/user', userAPI());
+
 
 // Start listening to the server
 const PORT = process.env.PORT || 8080;

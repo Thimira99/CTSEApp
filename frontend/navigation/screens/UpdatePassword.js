@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
 	StyleSheet,
 	Text,
@@ -12,18 +12,33 @@ import {
 } from 'react-native';
 
 import axios from 'axios';
-import { appURLs } from '../enums/url'
+import { appURLs } from '../../enums/url';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const RegisterScreen = (props) => {
+const UpdatePassword = (props) => {
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [contactNumber, setContactNumber] = useState('');
 	const [role, setRole] = useState('');
 
-	const onChangeName = (name) => {
-		setName(name);
-	};
+	const [eemail, setEemail] = useState();
+
+	useEffect(() => {
+		(async () => {
+			const email = await AsyncStorage.getItem('user');
+			setEemail(email);
+
+			var url = appURLs.BaseURL + `user/userById/${email}`;
+			axios.get(url).then((res) => {
+				setPassword(res.data.data[0].password);
+				setName(res.data.data[0].name);
+				setContactNumber(res.data.data[0].contactNumber);
+				setRole(res.data.data[0].role);
+				setEmail(res.data.data[0].email);
+			});
+		})();
+	}, []);
 
 	const onChangeEmail = (email) => {
 		setEmail(email);
@@ -33,17 +48,9 @@ const RegisterScreen = (props) => {
 		setPassword(pass);
 	};
 
-	const onChangeContactNumber = (num) => {
-		setContactNumber(num);
-	};
-
-	const onChangeRole = (role) => {
-		setRole(role);
-	};
-
 	//create USer
 	const register = () => {
-		var url =  appURLs.BaseURL + 'user/createUser';
+		var url = appURLs.BaseURL + `user/updateuserById/${eemail}`;
 		var data = {
 			name,
 			email,
@@ -58,6 +65,7 @@ const RegisterScreen = (props) => {
 			.post(url, data)
 			.then((res) => {
 				props.navigation.navigate('Login');
+				alert('Password Updated Successfully');
 			})
 			.catch((error) => {
 				alert('Not Registered');
@@ -67,62 +75,38 @@ const RegisterScreen = (props) => {
 	return (
 		<View style={styles.container}>
 			<ScrollView>
-				<Text style={styles.title}>Register Your Account</Text>
-				<Image style={styles.Image} source={require('../assets/register.png')} />
+				<Text style={styles.title}>Update Password</Text>
 
 				<View style={styles.card}>
+					<Text style={styles.title2}>Email</Text>
 					<View style={styles.inputView}>
 						<TextInput
 							style={styles.TextInput}
-							placeholder='Enter Name'
-							placeholderTextColor={'#858277'}
-							onChangeText={(name) => onChangeName(name)}
-						/>
-					</View>
-					<View style={styles.inputView}>
-						<TextInput
-							style={styles.TextInput}
-							placeholder='User Email'
-							placeholderTextColor={'#858277'}
 							onChangeText={(email) => onChangeEmail(email)}
+							placeholderTextColor={'#858277'}
+							value={email}
 						/>
 					</View>
+					<Text style={styles.title2}>New Password</Text>
 					<View style={styles.inputView}>
 						<TextInput
 							style={styles.TextInput}
 							placeholder='Password'
 							placeholderTextColor={'#858277'}
-							secureTextEntry={true}
 							onChangeText={(pass) => onChangePassword(pass)}
 						/>
 					</View>
-					<View style={styles.inputView}>
-						<TextInput
-							style={styles.TextInput}
-							placeholder='Contact Number'
-							placeholderTextColor={'#858277'}
-							secureTextEntry={true}
-							onChangeText={(num) => onChangeContactNumber(num)}
-						/>
-					</View>
-					<View style={styles.inputView}>
-						<TextInput
-							style={styles.TextInput}
-							placeholder='User Role'
-							placeholderTextColor={'#858277'}
-							onChangeText={(role) => onChangeRole(role)}
-						/>
-					</View>
+
+					<TouchableOpacity style={styles.registerBtn} onPress={register}>
+						<Text style={styles.loginText}>Update</Text>
+					</TouchableOpacity>
 				</View>
-				<TouchableOpacity style={styles.registerBtn} onPress={register}>
-					<Text style={styles.loginText}>Register Now</Text>
-				</TouchableOpacity>
 			</ScrollView>
 		</View>
 	);
 };
 
-export default RegisterScreen;
+export default UpdatePassword;
 
 const styles = StyleSheet.create({
 	container: {
@@ -133,15 +117,17 @@ const styles = StyleSheet.create({
 	},
 	card: {
 		marginTop: 40,
-		width: 350,
 		justifyContent: 'center',
 		alignItems: 'center',
-	},
-	Image: {
-		width: '100%',
-		height: '50%',
-		resizeMode: 'contain',
+		backgroundColor: '#35C953',
+		width: 350,
+		height: 550,
 		borderRadius: 10,
+	},
+	image: {
+		width: 150,
+		height: 150,
+		alignSelf: 'center',
 	},
 	topic: {
 		marginLeft: 100,
@@ -163,13 +149,12 @@ const styles = StyleSheet.create({
 		padding: 10,
 	},
 	registerBtn: {
-		backgroundColor: '#35C953',
+		backgroundColor: '#ffffff',
 		width: 300,
 		height: 50,
 		justifyContent: 'center',
 		margin: 10,
-		marginLeft: 30,
-		borderRadius: 10,
+		marginLeft: 20,
 	},
 	loginText: {
 		color: '#000000',
@@ -179,6 +164,13 @@ const styles = StyleSheet.create({
 	},
 	title: {
 		fontSize: 40,
+		fontWeight: 'bold',
+		color: '#000000',
+		textAlign: 'center',
+		marginTop: '5%',
+	},
+	title2: {
+		fontSize: 20,
 		fontWeight: 'bold',
 		color: '#000000',
 		textAlign: 'center',

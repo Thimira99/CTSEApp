@@ -26,7 +26,7 @@ const LogInScreen = (props) => {
 			axios
 				.get(url)
 				.then(async (res) => {
-					console.log(res.data.data[0].email);
+					console.log(res.data.data[0]);
 					await AsyncStorage.setItem('user', res.data.data[0].email);
 
 					if (
@@ -35,6 +35,7 @@ const LogInScreen = (props) => {
 					) {
 						if (res.data.data[0].role === 'gramasewaka') {
 							props.navigation.navigate('main');
+							console.log('Fine')
 					} else {
 						alert('Invalid Password or Email');
 					}
@@ -138,11 +139,12 @@ const styles = StyleSheet.create({
 		color: '#000000',
 	},
 	passwordInput: {
-		marginLeft: 24,
+		marginTop:13,
+		marginLeft: 20,
 	},
 
 	loginBtn: {
-		backgroundColor: '#35C953',
+		backgroundColor: '#00BFA6',
 		width: 300,
 		height: 50,
 		justifyContent: 'center',
