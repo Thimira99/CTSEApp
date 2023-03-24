@@ -15,8 +15,14 @@ import ViewCase from './navigation/screens/ViewCase';
 import AssignFamily from './navigation/screens/AssignFamily';
 import UpdatePassword from './navigation/screens/UpdatePassword';
 
+
 import customerHome from './navigation/screens/customer screens/cusHome';
 import placeOrder from './navigation/screens/customer screens/placeOrder';
+
+//delivery person
+import DeliveryPersonHomePage from './DeliveryPerson/DeliveryPersonHomePage';
+import ViewOrder from './DeliveryPerson/screens/ViewOrder';
+
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -33,8 +39,15 @@ const AppNavigator = () => (
 			<Screen name='assignFam' component={AssignFamily} />
 			<Screen name='updatePass' component={UpdatePassword} />
 
+
 			<Screen name='cusHome' component={customerHome} />
 			<Screen name='placeOrder' component={placeOrder} />
+
+
+			{/* delivery person */}
+			<Screen name='deliveryPersonHome' component={DeliveryPersonHomePage} />
+			<Screen name='viewOrder' component={ViewOrder} />
+
 
 		</Navigator>
 	</NavigationContainer>
