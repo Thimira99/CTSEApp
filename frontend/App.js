@@ -15,6 +15,8 @@ import ViewCase from './navigation/screens/ViewCase';
 import AssignFamily from './navigation/screens/AssignFamily';
 import UpdatePassword from './navigation/screens/UpdatePassword';
 
+import customerHome from './navigation/screens/customer screens/cusHome';
+import placeOrder from './navigation/screens/customer screens/placeOrder';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -30,6 +32,9 @@ const AppNavigator = () => (
 			<Screen name='viewCase' component={ViewCase} />
 			<Screen name='assignFam' component={AssignFamily} />
 			<Screen name='updatePass' component={UpdatePassword} />
+
+			<Screen name='cusHome' component={customerHome} />
+			<Screen name='placeOrder' component={placeOrder} />
 
 		</Navigator>
 	</NavigationContainer>

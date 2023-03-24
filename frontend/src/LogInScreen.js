@@ -36,7 +36,13 @@ const LogInScreen = (props) => {
 						if (res.data.data[0].role === 'gramasewaka') {
 							props.navigation.navigate('main');
 							console.log('Fine')
-					} else {
+					} 
+					
+					else if (res.data.data[0].role === 'customer') {
+						props.navigation.navigate('cusHome');
+						console.log('Fine')
+					} 
+					else {
 						alert('Invalid Password or Email');
 					}
 				}
