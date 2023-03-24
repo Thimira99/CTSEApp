@@ -12,7 +12,7 @@ export default function HomeScreen({ navigation }) {
 	return (
 		<ScrollView>
 			<View style={styles.container}>
-				<Image style={styles.image} source={require('../../assets/Home.png')} />
+				<Image style={styles.image} source={require('../../assets/admin.png')} />
 				<Text
 					style={{
 						fontSize: 26,
@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
 		backgroundColor: '#ffffff',
 		alignItems: 'center',
 		justifyContent: 'center',
+		height:735
 	},
 	image: {
 		width: 200,
@@ -98,20 +99,19 @@ const styles = StyleSheet.create({
 		width: 127,
 		height: 120,
 		margin: 13,
-		backgroundColor: '#35C953',
+		backgroundColor: '#00BFA6',
 		borderRadius: 10,
 	},
 	cardImage2: {
 		width: 120,
 		height: 120,
 		margin: 13,
-		backgroundColor: '#35C953',
+		backgroundColor: '#00BFA6',
 		borderRadius: 10,
 		marginLeft: 80,
 	},
 	body: {
 		marginTop: 20,
-		backgroundColor: '#35C953',
 		width: 350,
 		height: 150,
 		borderRadius: 10,
@@ -133,8 +133,13 @@ const styles = StyleSheet.create({
 	},
 	card: {
 		flexDirection: 'row',
+		backgroundColor: '#00BFA6',
+		borderRadius: 10,
 	},
 	card2: {
 		flexDirection: 'row',
+		backgroundColor: '#00BFA6',
+		borderRadius: 10,
+
 	},
 });

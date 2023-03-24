@@ -12,44 +12,53 @@ import {
 } from 'react-native';
 
 import axios from 'axios';
-import { appURLs } from '../enums/url'
+import { appURLs } from '../../enums/url';
 
-const RegisterScreen = (props) => {
-	const [name, setName] = useState('');
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-	const [contactNumber, setContactNumber] = useState('');
-	const [role, setRole] = useState('');
+import * as ImagePicker from 'expo-image-picker';
 
-	const onChangeName = (name) => {
-		setName(name);
+const AssignFamily = (props) => {
+	const [caseTitle, setTitle] = useState('');
+	const [description, setDes] = useState('');
+	const [location, setLocation] = useState('');
+	const [image, setImage] = useState('');
+	const [assignDate, setassignDate] = useState('');
+
+	const pickFromGallery = async () => {
+		const data = await ImagePicker.launchImageLibraryAsync({
+			mediaTypes: ImagePicker.MediaTypeOptions.Images,
+			allowsEditing: true,
+			aspect: [1, 1],
+			quality: 0.5,
+		});
+
+		setImage(data.uri);
 	};
 
-	const onChangeEmail = (email) => {
-		setEmail(email);
+	const onChangeTitle = (title) => {
+		setTitle(title);
 	};
 
-	const onChangePassword = (pass) => {
-		setPassword(pass);
+	const onChangeDescription = (des) => {
+		setDes(des);
 	};
 
-	const onChangeContactNumber = (num) => {
-		setContactNumber(num);
+	const onChangeLocation = (loc) => {
+		setLocation(loc);
 	};
 
-	const onChangeRole = (role) => {
-		setRole(role);
+	const onChangeDate = (date) => {
+		setassignDate(date);
 	};
 
 	//create USer
 	const register = () => {
-		var url =  appURLs.BaseURL + 'user/createUser';
+		var url = appURLs.BaseURL + 'Family/createFamily';
 		var data = {
-			name,
-			email,
-			password,
-			contactNumber,
-			role,
+			caseTitle,
+			description,
+			location,
+			image,
+			assignDate,
 		};
 
 		console.log(data);
@@ -57,7 +66,7 @@ const RegisterScreen = (props) => {
 		axios
 			.post(url, data)
 			.then((res) => {
-				props.navigation.navigate('Login');
+				props.navigation.navigate('Family Details');
 			})
 			.catch((error) => {
 				alert('Not Registered');
@@ -67,62 +76,70 @@ const RegisterScreen = (props) => {
 	return (
 		<View style={styles.container}>
 			<ScrollView>
-				<Text style={styles.title}>Register Your Account</Text>
-				<Image style={styles.Image} source={require('../assets/register.png')} />
+				<Text style={styles.title}>Assign Family Details</Text>
 
 				<View style={styles.card}>
+					<Text style={styles.title2}>Case Title</Text>
 					<View style={styles.inputView}>
 						<TextInput
 							style={styles.TextInput}
 							placeholder='Enter Name'
 							placeholderTextColor={'#858277'}
-							onChangeText={(name) => onChangeName(name)}
+							onChangeText={(title) => onChangeTitle(title)}
 						/>
 					</View>
+					<Text style={styles.title2}>Description</Text>
+
 					<View style={styles.inputView}>
 						<TextInput
 							style={styles.TextInput}
 							placeholder='User Email'
 							placeholderTextColor={'#858277'}
-							onChangeText={(email) => onChangeEmail(email)}
+							onChangeText={(des) => onChangeDescription(des)}
 						/>
 					</View>
+					<Text style={styles.title2}>Location</Text>
+
 					<View style={styles.inputView}>
 						<TextInput
 							style={styles.TextInput}
 							placeholder='Password'
 							placeholderTextColor={'#858277'}
 							secureTextEntry={true}
-							onChangeText={(pass) => onChangePassword(pass)}
+							onChangeText={(loc) => onChangeLocation(loc)}
 						/>
 					</View>
-					<View style={styles.inputView}>
-						<TextInput
-							style={styles.TextInput}
-							placeholder='Contact Number'
-							placeholderTextColor={'#858277'}
-							secureTextEntry={true}
-							onChangeText={(num) => onChangeContactNumber(num)}
+					<Text style={styles.title2}>Image</Text>
+					<TouchableOpacity
+						style={styles.registerBtn}
+						onPress={pickFromGallery}
+					>
+						<Image
+							style={styles.image}
+							source={require('../../assets/photo.png')}
 						/>
-					</View>
+					</TouchableOpacity>
+
+					<Text style={styles.title2}>Assign Date</Text>
+
 					<View style={styles.inputView}>
 						<TextInput
 							style={styles.TextInput}
 							placeholder='User Role'
 							placeholderTextColor={'#858277'}
-							onChangeText={(role) => onChangeRole(role)}
+							onChangeText={(date) => onChangeDate(date)}
 						/>
 					</View>
 				</View>
 				<TouchableOpacity style={styles.registerBtn} onPress={register}>
-					<Text style={styles.loginText}>Register Now</Text>
+					<Text style={styles.loginText}>Assign</Text>
 				</TouchableOpacity>
 			</ScrollView>
 		</View>
 	);
 };
 
-export default RegisterScreen;
+export default AssignFamily;
 
 const styles = StyleSheet.create({
 	container: {
@@ -132,16 +149,25 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	card: {
-		marginTop: 40,
 		width: 350,
+		padding: 10,
 		justifyContent: 'center',
 		alignItems: 'center',
-	},
-	Image: {
-		width: '100%',
-		height: '50%',
-		resizeMode: 'contain',
 		borderRadius: 10,
+		backgroundColor: '#35C953',
+		marginTop: 20,
+		marginLeft: 10,
+	},
+	title2: {
+		fontSize: 20,
+		fontWeight: 'bold',
+		color: '#000000',
+		textAlign: 'center',
+	},
+	image: {
+		width: 50,
+		height: 50,
+		alignSelf: 'center',
 	},
 	topic: {
 		marginLeft: 100,
@@ -164,11 +190,10 @@ const styles = StyleSheet.create({
 	},
 	registerBtn: {
 		backgroundColor: '#35C953',
-		width: 300,
+		width: 350,
 		height: 50,
 		justifyContent: 'center',
 		margin: 10,
-		marginLeft: 30,
 		borderRadius: 10,
 	},
 	loginText: {
@@ -178,7 +203,7 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold',
 	},
 	title: {
-		fontSize: 40,
+		fontSize: 30,
 		fontWeight: 'bold',
 		color: '#000000',
 		textAlign: 'center',

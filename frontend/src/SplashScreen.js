@@ -8,11 +8,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 const SplashScreen = (props) => {
 	return (
 		<View style={styles.container}>
-			<Image style={styles.Image} source={require('../assets/First.png')} />
+			<Image style={styles.Image} source={require('../assets/home.png')} />
 			<Text style={styles.title}>Lets get started</Text>
 			<Text style={styles.des}>
-				Be the reason someone smiles today! Together, we can be the generation
-				that ends hunger.
+				Be the reason someone smiles today! Together.
 			</Text>
 			<TouchableOpacity
 				style={styles.loginBtn}
@@ -44,7 +43,7 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 	},
 	loginBtn: {
-		backgroundColor: '#35C953',
+		backgroundColor: '#00BFA6',
 		width: 300,
 		height: 50,
 		justifyContent: 'center',
