@@ -22,11 +22,19 @@ app.route('/').get((req, res) => {
 //import routes
 
 const userAPI = require('./src/api/user.api');
+
+const customerAPI = require('./src/api/customer.api');
+
+// Define routes
+app.use('/user', userAPI());
+app.use(customerAPI());
+
 const deliveryPersonAPI = require('./src/api/deliveryPerson.api');
 
 // Define routes
 app.use('/user', userAPI());
 app.use('/delivery', deliveryPersonAPI());
+
 
 
 // Start listening to the server
