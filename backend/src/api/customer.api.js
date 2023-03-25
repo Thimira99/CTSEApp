@@ -15,6 +15,10 @@ module.exports = function () {
 	//get method
 	router.get('/getDetails', customerController.getDetails);
 
+	//get food method
+	router.get('/getFood', customerController.getFoods);
+
+
 	//update
 	router.post('/updateDetailsById/:id', customerController.updateOrderById);
 

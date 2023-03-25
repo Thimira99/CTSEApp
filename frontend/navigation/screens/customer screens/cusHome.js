@@ -2,85 +2,131 @@ import * as React from 'react';
 import {
 	View,
 	Text,
-	Image,
-	TouchableOpacity,
-	ScrollView,
 	StyleSheet,
+	ScrollView,
+	FlatList,
+	TouchableOpacity,
+    Image
 } from 'react-native';
 
-export default function HomeScreen({ navigation }) {
+import { appURLs } from '../../../enums/url';
+import axios from 'axios';
+
+export default function DetailsScreen(props) {
+	const [data, setData] = React.useState([]);
+	
+	React.useEffect(() => {
+		var url = appURLs.BaseURL + 'getFood';
+			axios.get(url).then((res) => {
+				console.log(res.data.foods);
+				setData(res.data.foods);
+			});
+	}, []);
+
+
 	return (
-		<ScrollView>
-			<View style={styles.container}>
-				{/* <Image style={styles.image} source={require('../../assets/admin.png')} /> */}
-				<Text
-					style={{
-						fontSize: 26,
-						fontWeight: 'bold',
-						marginTop: 10,
-					}}
-				>
-					Welcome !
-				</Text>
-				<View style={styles.body}>
-					<View style={styles.card}>
-						{/* <Image
-							style={styles.cardImage}
-							source={require('../../assets/all.png')}
-						/> */}
-						<TouchableOpacity style={styles.loginBtn} onPress={() => navigation.navigate("placeOrder")}>
-				            <Text style={styles.loginText}>Place order</Text>
-			            </TouchableOpacity>
-						
-					</View>
+		<View style={styles.container}>
+			<ScrollView>
+				<View style={styles.header}>
+					<Text style={styles.headerTxt}>All Foods</Text>
+					<FlatList
+						style={styles.notificationList}
+						data={data}
+						keyExtractor={(item) => {
+							return item.id;
+						}}
+						renderItem={({ item }) => {
+							return (
+								<View style={styles.card}>
+									<View style={styles.cardRow}>
+										<View style={styles.cardColumn}></View>
+										<View style={styles.cardColumn}>
+											<Text
+												style={[
+													styles.txt,
+													{
+														marginLeft: 20,
+														color: '#000000',
+														fontSize: 20,
+														fontWeight: 'bold',
+														marginTop: -20,
+													},
+												]}
+											><Text style={styles.nameText}>Name : </Text>
+												{item.name}
+											</Text>
+											<Text
+												style={[
+													styles.txt,
+													{
+														marginLeft: 35,
+														color: '#000000',
+														fontSize: 20,
+														fontWeight: 'bold',
+														marginTop: 10,
+													},
+												]}
+											>
+												<Image
+							                        style={styles.cardImage2}
+							                        source={{uri:item.logoUrl}}
+						                        />
+											</Text>
+
+											<View style={styles.cardData}>
+												<TouchableOpacity
+													style={styles.loginBtn}
+													onPress={() => props.navigation.navigate('placeOrder')
+													}
+												>
+													<Text style={styles.loginText}>Place order</Text>
+												</TouchableOpacity>
+											</View>
+										</View>
+									</View>
+								</View>
+							);
+						}}
+					/>
 				</View>
-			
-			</View>
-		</ScrollView>
+			</ScrollView>
+		</View>
 	);
 }
 
 const styles = StyleSheet.create({
 	container: {
-		backgroundColor: '#ffffff',
+		flex: 1,
+		padding: 5,
 		alignItems: 'center',
-		justifyContent: 'center',
-		height:735
+		backgroundColor: '#ffffff',
 	},
-	image: {
-		width: 200,
-		height: 200,
-		marginBottom: 10,
+	notificationList: {
+		marginLeft: -30,
+		padding: 5,
 	},
-	cardImage: {
-		width: 127,
-		height: 120,
-		margin: 13,
-		backgroundColor: '#00BFA6',
-		borderRadius: 10,
-	},
-	cardImage2: {
-		width: 120,
-		height: 120,
-		margin: 13,
-		backgroundColor: '#00BFA6',
-		borderRadius: 10,
-		marginLeft: 80,
-	},
-	body: {
+	cardData: {
+		flexDirection: 'row',
 		marginTop: 20,
-		width: 350,
-		height: 150,
-		borderRadius: 10,
+	},
+    cardImage2:{
+        marginLeft:55,
+        width:120,
+        height:120
+    },
+	title: {
+		color: '#000000',
+		fontSize: 18,
+		textDecorationLine: 'underline',
 	},
 	loginBtn: {
 		backgroundColor: '#ffffff',
-		width: 300,
-		height: 50,
+		width: 200,
+		height: 25,
 		justifyContent: 'center',
-		borderRadius: 10,
-		marginLeft: 30,
-		marginBottom: 10,
+		borderRadius: 5,
+		marginLeft: 40,
+		marginTop: 5,
 	},
 	loginText: {
 		color: '#000000',
@@ -89,14 +135,109 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold',
 	},
 	card: {
-		flexDirection: 'row',
+		flex: 1,
+		flexDirection: 'column',
+		width: 320,
 		backgroundColor: '#00BFA6',
-		borderRadius: 10,
+		margin: 10,
+		padding: 20,
+		borderRadius: 15,
+		elevation: 5,
 	},
-	card2: {
+	cardRow: {
+		flex: 1,
 		flexDirection: 'row',
-		backgroundColor: '#00BFA6',
-		borderRadius: 10,
+		padding: 5,
+		marginTop: 20,
+	},
+	txt: {
+		color: '#000000',
+		fontSize: 20,
+		textAlign: 'left',
+		padding: 5,
+		marginLeft: 40,
+	},
+	decline: {
+		width: 100,
+		color: '#ffffff',
+		fontSize: 15,
+		textAlign: 'center',
+		padding: 5,
+		margin: 5,
+		backgroundColor: '#D41930',
+		borderRadius: 20,
+	},
+	approve: {
+		width: 100,
+		color: '#ffffff',
+		fontSize: 15,
+		textAlign: 'center',
+		padding: 5,
+		margin: 5,
+		backgroundColor: '#28A745',
+		borderRadius: 20,
+	},
+	pending: {
+		width: 100,
+		color: '#ffffff',
+		fontSize: 14,
+		textAlign: 'center',
+		padding: 5,
+		margin: 5,
+		marginBottom: 5,
+		backgroundColor: '#D4890E',
+		borderRadius: 20,
+	},
+	btn: {
+		elevation: 5,
+		margin: 10,
+		padding: 3,
+		width: 160,
+		marginRight: 5,
+		backgroundColor: '#01949A',
+		borderRadius: 20,
+		alignSelf: 'center',
+		alignItems: 'center',
+	},
+	Invoicebtn: {
+		marginTop: 30,
+		marginRight: 50,
+		elevation: 5,
+		margin: 10,
+		padding: 3,
+		width: 160,
+		height: 30,
+		backgroundColor: '#01949A',
+		borderRadius: 20,
+		alignSelf: 'center',
+		alignItems: 'center',
+	},
+	btnTxt: {
+		color: 'white',
+		fontSize: 15,
+		textAlign: 'center',
+	},
+	header: {
+		marginLeft: 30,
+	},
+	headerTxt: {
+		marginLeft: 90,
+		marginTop: 30,
+		fontSize: 30,
+		fontWeight: 'bold',
+	},
 
+
+	nameText: {
+		color: '#000000',
+		textAlign: 'center',
+		fontSize: 18,
+		fontWeight: 'bold',
+	},
+	emailText: {
+		color: '#000000',
+		textAlign: 'center',
+		fontSize: 18,
+		fontWeight: 'bold',
 	},
 });

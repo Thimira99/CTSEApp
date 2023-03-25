@@ -67,14 +67,14 @@ export default function Details(props) {
 												style={[
 													styles.txt,
 													{
-														marginLeft: 20,
+														marginLeft: 35,
 														color: '#000000',
 														fontSize: 20,
 														fontWeight: 'bold',
 														marginTop: -20,
 													},
 												]}
-											><Text style={styles.nameText}>Title : </Text>
+											><Text style={styles.emailText}>Title : </Text>
 												{item.title}
 											</Text>
 											<Text
@@ -220,10 +220,14 @@ const styles = StyleSheet.create({
 		flexDirection: 'column',
 		width: 320,
 		backgroundColor: '#35C953',
-		margin: 10,
+		margin: 20,
 		padding: 20,
 		borderRadius: 15,
 		elevation: 5,
+		shadowColor: '#000',
+		shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.5,
+        shadowRadius: 10,
 	},
 	cardRow: {
 		flex: 1,
@@ -302,8 +306,10 @@ const styles = StyleSheet.create({
 		marginLeft: 30,
 	},
 	headerTxt: {
-		marginLeft: 90,
-		marginTop: 30,
+		// marginLeft: 30,
+		justifyContent:'center',
+		textAlign: 'center',
+		marginTop: 10,
 		fontSize: 30,
 		fontWeight: 'bold',
 	},
@@ -317,7 +323,8 @@ const styles = StyleSheet.create({
 	},
 	emailText: {
 		color: '#000000',
-		textAlign: 'center',
+		justifyContent:'space-between',
+		textAlign: 'left',
 		fontSize: 18,
 		fontWeight: 'bold',
 	},

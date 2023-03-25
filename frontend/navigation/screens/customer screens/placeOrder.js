@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, TouchableOpacity, Pressable, Button, TextInput } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Pressable, Button, TextInput, Image } from 'react-native';
 import React, { useState } from 'react';
 import axios from 'axios';
 import { appURLs } from '../../../enums/url'
@@ -52,7 +52,7 @@ export default function placeOrder(props) {
 			email,
             address
 		};
-
+         
         console.log(data);
 
         axios.post(url, data)
@@ -68,7 +68,7 @@ export default function placeOrder(props) {
     return (
         <View style={styles.container}>
            <Text style={styles.des}>Lets help you place the order!</Text>
-			{/* <Image style={styles.image} source={require('../assets/login.png')} /> */}
+			<Image style={styles.image} source={require('../../../assets/First.png')} />
             <View style={styles.inputView}>
 				<TextInput
 					style={styles.TextInput}
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
     },
     input: {
 
-        marginBottom: 20,
+        marginBottom: 10,
         paddingHorizontal: 8,
         paddingVertical: 6,
         borderBottomWidth: 1,
@@ -152,11 +152,17 @@ const styles = StyleSheet.create({
     inputView: {
 		backgroundColor: '#E8E8E8',
 		borderRadius: 15,
-		width: '70%',
+		width: '80%',
 		height: 45,
-		marginBottom: 20,
+		// marginBottom: 20,
+        margin:'1%',
 
 		alignItems: 'center',
+	},
+    TextInput: {
+		height: 50,
+		flex: 1,
+		color: '#000000',
 	},
     addBtn: {
 		backgroundColor: '#00BFA6',
@@ -164,7 +170,7 @@ const styles = StyleSheet.create({
 		height: 50,
 		justifyContent: 'center',
 		margin: 10,
-		marginTop: '20%',
+		// marginTop: '20%',
 		borderRadius: 10,
 	},
 	addText: {
@@ -172,6 +178,17 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 		fontSize: 18,
 		fontWeight: 'bold',
+	},
+    image: {
+		width: 200,
+		height: 100,
+        padding:80
+		// marginBottom: 30,
+	},
+    des: {
+		marginTop: -70,
+		fontSize: 30,
+		textAlign: 'center',
 	},
 
 
