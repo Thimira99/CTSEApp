@@ -72,16 +72,17 @@ const updateOrderById = async (req, res) => {
 
 //delete room from the system
 const deleteOrderDetails = async (req, res) => {
-    Customer.findByIdAndRemove(req.params.id).exec((err, deletedDetails) => {
-        if (err) {
-            return res.status(400).json({
-                message: "Couldn't delete the details something is wrong!", deletedDetails
-            });
-        }
-        return res.status(200).json({
-            success: "Details removed successfully!", deletedDetails
-        });
-    });
+    if (req.params.id) {
+		await Customer.findByIdAndRemove({ _id: req.params.id })
+			.then((data) => {
+				res.status(200).send({ 
+                    message:"Detail removed successfully!"
+                });
+			})
+			.catch((error) => {
+				res.status(500).send({ error: error.message });
+			});
+	}
 };
 
 

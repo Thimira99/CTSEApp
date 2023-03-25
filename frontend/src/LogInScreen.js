@@ -54,7 +54,7 @@ const LogInScreen = (props) => {
 						alert('Invalid Password or Email');
 					}
 				}
-				})
+				)
 
 				.catch((err) => {
 					alert('No User Found');

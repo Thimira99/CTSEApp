@@ -121,6 +121,10 @@ export default function placeOrder(props) {
 			<TouchableOpacity style={styles.addBtn} onPress={add}>
 				<Text style={styles.addText}>Add</Text>
 			</TouchableOpacity>
+
+            <TouchableOpacity style={styles.addBtn} onPress={() => props.navigation.navigate('details')}>
+				<Text style={styles.addText}>View History</Text>
+			</TouchableOpacity>
 			
         </View>
     )

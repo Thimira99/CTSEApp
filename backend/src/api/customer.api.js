@@ -19,7 +19,7 @@ module.exports = function () {
 	router.post('/updateDetailsById/:id', customerController.updateOrderById);
 
     //delete
-	router.delete('/deleteDetailsById/:email', customerController.deleteOrderDetails);
+	router.delete('/deleteDetailsById/:id', customerController.deleteOrderDetails);
 
 
 	return router;
