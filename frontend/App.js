@@ -17,6 +17,8 @@ import UpdatePassword from './navigation/screens/UpdatePassword';
 
 import customerHome from './navigation/screens/customer screens/cusHome';
 import placeOrder from './navigation/screens/customer screens/placeOrder';
+import Details from './navigation/screens/customer screens/details';
+import updateDetails from './navigation/screens/customer screens/updateDetails';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -35,7 +37,9 @@ const AppNavigator = () => (
 
 			<Screen name='cusHome' component={customerHome} />
 			<Screen name='placeOrder' component={placeOrder} />
-
+			<Screen name='details' component={Details} />
+			<Screen name='updateDetails' component={updateDetails} />
+			
 		</Navigator>
 	</NavigationContainer>
 );

@@ -17,8 +17,8 @@ const addOrderDetails = async (req, res) => {
 
 // Get order by order id
 const getPlaceOrderById = async (req, res) => {
-	if (req.params.email) {
-		await User.find({ email: req.params.email })
+	if (req.params.id) {
+		await Customer.find({ _id: req.params.id })
 			.then((data) => {
 				res.status(200).send({ data: data });
 			})
@@ -42,25 +42,25 @@ const getOneOrder = async (req, res) => {
 };
 
 //get all users
-// const getUsers = async (req, res) => {
-// 	User.find().exec((err, users) => {
-// 		if (err) {
-// 			return res.status(400).json({
-// 				error: err,
-// 			});
-// 		}
-// 		return res.status(200).json({
-// 			success: true,
-// 			users,
-// 		});
-// 	});
-// };
+const getDetails = async (req, res) => {
+	Customer.find().exec((err, customers) => {
+		if (err) {
+			return res.status(400).json({
+				error: err,
+			});
+		}
+		return res.status(200).json({
+			success: true,
+			customers,
+		});
+	});
+};
 
 // update
 const updateOrderById = async (req, res) => {
 	const data = req.body;
-	if (req.params.email) {
-		await Customer.findOneAndUpdate({ email: req.params.email }, data)
+	if (req.params.id) {
+		await Customer.findOneAndUpdate({ _id: req.params.id }, data)
 			.then((data) => {
 				res.status(200).send({ data: data });
 			})
@@ -90,6 +90,6 @@ module.exports = {
 	getPlaceOrderById,
 	getOneOrder,
 	updateOrderById,
-	deleteOrderDetails
-    
+	deleteOrderDetails,
+    getDetails
 };
