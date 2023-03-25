@@ -45,6 +45,11 @@ const UpdateUser = (props) => {
         })
 	};
 
+	const handleConfOrder= () =>{
+		alert("Order Confirmed")
+            props.navigation.navigate('cusHome');
+	}
+
 	React.useEffect(() => {
 		var url = appURLs.BaseURL + `getDetails/${route.params.id}`;
 		axios.get(url).then((res) => {
@@ -114,11 +119,12 @@ const UpdateUser = (props) => {
 				<Text style={styles.title}>Update saved detials</Text>
 
 				<View style={styles.card}>
-                <Text style={styles.title2}>Title</Text>
+                <Text style={styles.title2}>Title: </Text>
                 <View style={styles.inputView}>
                     <TextInput
                         style={styles.TextInput}
                         placeholder='User Role'
+                        id='title'
                         value={title}
                         placeholderTextColor={'#858277'}
                         onChangeText={(title) => onChangeTitle(title)}
@@ -131,6 +137,7 @@ const UpdateUser = (props) => {
 							onChangeText={(firstName) => onChangeFName(firstName)}
 							placeholderTextColor={'#858277'}
 							value={firstName}
+                            id='firstName'
 						/>
 					</View>
                     <Text style={styles.title2}>Last name: </Text>
@@ -140,6 +147,7 @@ const UpdateUser = (props) => {
 							onChangeText={(lastName) => onChangeLName(lastName)}
 							placeholderTextColor={'#858277'}
 							value={lastName}
+                            id='lastName'
 						/>
 					</View>
 					<Text style={styles.title2}>Email: </Text>
@@ -148,6 +156,7 @@ const UpdateUser = (props) => {
 							style={styles.TextInput}
 							placeholder='User Email'
 							value={email}
+                            id='email'
 							placeholderTextColor={'#858277'}
 							onChangeText={(email) => setEmail(email)}
 						/>
@@ -158,6 +167,7 @@ const UpdateUser = (props) => {
 							style={styles.TextInput}
 							placeholder='User Email'
 							value={phoneNumber}
+                            id='phoneNumber'
 							placeholderTextColor={'#858277'}
 							onChangeText={(phoneNumber) => setPhoneNumber(phoneNumber)}
 						/>
@@ -168,6 +178,7 @@ const UpdateUser = (props) => {
 						<TextInput
 							style={styles.TextInput}
 							value={address}
+                            id='address'
 							placeholder='Contact Number'
 							placeholderTextColor={'#858277'}
 							onChangeText={(address) => setAddress(address)}
@@ -178,8 +189,12 @@ const UpdateUser = (props) => {
 						<Text style={styles.loginText}>Update</Text>
 					</TouchableOpacity>
 
-                    <TouchableOpacity style={styles.registerBtn} onPress={handleDelete}>
+                    <TouchableOpacity style={styles.deleteBtn} onPress={handleDelete}>
 						<Text style={styles.loginText}>Delete</Text>
+					</TouchableOpacity>
+
+					<TouchableOpacity style={styles.confBtn} onPress={handleConfOrder}>
+						<Text style={styles.loginText}>Confirm Order</Text>
 					</TouchableOpacity>
 				</View>
 			</ScrollView>
@@ -200,7 +215,7 @@ const styles = StyleSheet.create({
 		marginTop: 40,
 		justifyContent: 'center',
 		alignItems: 'center',
-		backgroundColor: '#35C953',
+		backgroundColor: '#B8BFB9',
 		width: 350,
 		height: 'auto',
 		borderRadius: 10,
@@ -217,7 +232,7 @@ const styles = StyleSheet.create({
 	inputView: {
 		width: '70%',
 		height: 45,
-		marginBottom: 20,
+		margin: 10,
 		backgroundColor: '#E8E8E8',
 		borderRadius: 15,
 		alignItems: 'center',
@@ -230,7 +245,23 @@ const styles = StyleSheet.create({
 		padding: 10,
 	},
 	registerBtn: {
-		backgroundColor: '#ffffff',
+		backgroundColor: '#DCDC24',
+		width: 300,
+		height: 50,
+		justifyContent: 'center',
+		margin: 10,
+		marginLeft: 20,
+	},
+	deleteBtn: {
+		backgroundColor: '#B22525',
+		width: 300,
+		height: 50,
+		justifyContent: 'center',
+		margin: 10,
+		marginLeft: 20,
+	},
+	confBtn: {
+		backgroundColor: '#539061',
 		width: 300,
 		height: 50,
 		justifyContent: 'center',
@@ -254,7 +285,7 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 		fontWeight: 'bold',
 		color: '#000000',
-		textAlign: 'center',
+		textAlign: 'left',
 		marginTop: '5%',
 	},
 	des: {

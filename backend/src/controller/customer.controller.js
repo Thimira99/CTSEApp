@@ -1,4 +1,5 @@
 const Customer = require('../model/customer.model');
+const Food  =  require('../model/food.model');
 
 // Add new place order
 const addOrderDetails = async (req, res) => {
@@ -41,7 +42,7 @@ const getOneOrder = async (req, res) => {
 	}
 };
 
-//get all users
+//get all oder details
 const getDetails = async (req, res) => {
 	Customer.find().exec((err, customers) => {
 		if (err) {
@@ -52,6 +53,21 @@ const getDetails = async (req, res) => {
 		return res.status(200).json({
 			success: true,
 			customers,
+		});
+	});
+};
+
+//get all food
+const getFoods = async (req, res) => {
+	Food.find().exec((err, foods) => {
+		if (err) {
+			return res.status(400).json({
+				error: err,
+			});
+		}
+		return res.status(200).json({
+			success: true,
+			foods,
 		});
 	});
 };
@@ -92,5 +108,6 @@ module.exports = {
 	getOneOrder,
 	updateOrderById,
 	deleteOrderDetails,
-    getDetails
+    getDetails,
+	getFoods
 };
