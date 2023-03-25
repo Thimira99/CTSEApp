@@ -12,6 +12,7 @@ export default function placeOrder(props) {
 	const [lastName, setLastName] = useState('');
 	const [title, setTitle] = useState('');
 	const [phoneNumber, setPhoneNumber] = useState('');
+    const [address, setAddress] = useState(''); 
 
     const handleEmail = (email) => {
 		setEmail(email);
@@ -33,6 +34,10 @@ export default function placeOrder(props) {
 		setPhoneNumber(phoneNumber);
 	};
 
+	const handleAddr = (address) => {
+		setAddress(address);
+	};
+
 
     //add
     const add =() =>{
@@ -45,13 +50,14 @@ export default function placeOrder(props) {
 			title,
 			phoneNumber,
 			email,
+            address
 		};
 
         console.log(data);
 
         axios.post(url, data)
 			.then((res) => {
-				props.navigation.navigate('cusHome');
+				props.navigation.navigate('details');
 			})
 			.catch((error) => {
 				alert('Error in adding the details!');
@@ -101,6 +107,14 @@ export default function placeOrder(props) {
 					placeholder={'Enter Your email'}
 					placeholderTextColor={'#858277'}
 					onChangeText={(email) => handleEmail(email)}
+				/>
+			</View>
+            <View style={styles.inputView}>
+				<TextInput
+					style={styles.TextInput}
+					placeholder={'Enter Your address'}
+					placeholderTextColor={'#858277'}
+					onChangeText={(address) => handleAddr(address)}
 				/>
 			</View>
 

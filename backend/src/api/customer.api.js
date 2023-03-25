@@ -7,13 +7,16 @@ module.exports = function () {
 	router.post('/addOrderDetails', customerController.addOrderDetails);
 
 	//get method
-	router.get('/detailsById/:email', customerController.getPlaceOrderById);
+	router.get('/detailsById/:id', customerController.getPlaceOrderById);
 
 	//get one user
 	router.get('/getDetails/:id', customerController.getOneOrder);
 
+	//get method
+	router.get('/getDetails', customerController.getDetails);
+
 	//update
-	router.put('/updateDetailsById/:email', customerController.updateOrderById);
+	router.post('/updateDetailsById/:id', customerController.updateOrderById);
 
     //delete
 	router.delete('/deleteDetailsById/:email', customerController.deleteOrderDetails);

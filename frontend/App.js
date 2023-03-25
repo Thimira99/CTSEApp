@@ -18,6 +18,8 @@ import UpdatePassword from './navigation/screens/UpdatePassword';
 
 import customerHome from './navigation/screens/customer screens/cusHome';
 import placeOrder from './navigation/screens/customer screens/placeOrder';
+import Details from './navigation/screens/customer screens/details';
+import updateDetails from './navigation/screens/customer screens/updateDetails';
 
 //delivery person
 import DeliveryPersonHomePage from './DeliveryPerson/DeliveryPersonHomePage';
@@ -43,10 +45,16 @@ const AppNavigator = () => (
 			<Screen name='cusHome' component={customerHome} />
 			<Screen name='placeOrder' component={placeOrder} />
 
+			<Screen name='details' component={Details} />
+			<Screen name='updateDetails' component={updateDetails} />
+			
+
+
 
 			{/* delivery person */}
 			<Screen name='deliveryPersonHome' component={DeliveryPersonHomePage} />
 			<Screen name='viewOrder' component={ViewOrder} />
+
 
 
 		</Navigator>
