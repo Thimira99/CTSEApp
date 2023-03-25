@@ -16,10 +16,23 @@ import axios from 'axios';
 
 export default function Details(props) {
 
-    const route = useRoute();
 	const [data, setData] = React.useState([]);
 	const [email, setEmail] = useState();
 	const [firstName, setFirstName] = useState('');
+
+
+    // const handleDelete = () => {
+    //     const route = useRoute();
+    //     const id = route.params.id;
+
+	// 	console.log("id", id);
+
+	// 	var deleteAPI = appURLs.BaseURL + `deleteDetailsById/${id}`;
+    //     axios.delete(deleteAPI).then(res => {
+    //         alert("Deleted Successfully")
+    //         props.navigation.navigate('placeOrder');
+    //     })
+	// };
 
 	// const [lastName, setLastName] = useState('');
 	// const [title, setTitle] = useState('');
@@ -144,8 +157,16 @@ export default function Details(props) {
 														})
 													}
 												>
-													<Text style={styles.loginText}>Update</Text>
+													<Text style={styles.loginText}>Edit</Text>
 												</TouchableOpacity>
+
+                                                {/* <TouchableOpacity
+													style={styles.loginBtn}
+													onPress={() => handleDelete(item._id)}
+												>
+													<Text style={styles.loginText}>Delete</Text>
+												</TouchableOpacity> */}
+
 											</View>
 										</View>
 									</View>

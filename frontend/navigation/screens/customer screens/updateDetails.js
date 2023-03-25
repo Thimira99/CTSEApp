@@ -30,7 +30,21 @@ const UpdateUser = (props) => {
 	const [data, setData] = useState({});
 	// const [id, setid] = useState();
     const id = route.params.id;
-    console.log("id",id)
+    console.log("id",id);
+
+    const handleDelete = () => {
+        // const route = useRoute();
+        // const id = route.params.id;
+
+		console.log("id", id);
+
+		var deleteAPI = appURLs.BaseURL + `deleteDetailsById/${id}`;
+        axios.delete(deleteAPI).then(res => {
+            alert("Deleted Successfully")
+            props.navigation.navigate('placeOrder');
+        })
+	};
+
 	React.useEffect(() => {
 		var url = appURLs.BaseURL + `getDetails/${route.params.id}`;
 		axios.get(url).then((res) => {
@@ -86,7 +100,7 @@ const UpdateUser = (props) => {
 		axios
 			.post(url, data)
 			.then((res) => {
-				props.navigation.navigate('details');
+				props.navigation.navigate('placeOrder');
 				alert('Updated Successfully');
 			})
 			.catch((error) => {
@@ -162,6 +176,10 @@ const UpdateUser = (props) => {
 					
 					<TouchableOpacity style={styles.registerBtn} onPress={update}>
 						<Text style={styles.loginText}>Update</Text>
+					</TouchableOpacity>
+
+                    <TouchableOpacity style={styles.registerBtn} onPress={handleDelete}>
+						<Text style={styles.loginText}>Delete</Text>
 					</TouchableOpacity>
 				</View>
 			</ScrollView>
