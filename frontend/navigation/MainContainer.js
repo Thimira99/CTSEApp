@@ -8,12 +8,12 @@ import HomeScreen from './screens/HomeScreen';
 import AllCasesScreen from './screens/DetailsScreen';
 import SettingsScreen from './screens/SettingsScreen';
 import ProfileScreen from './screens/ProfileScreen';
-// import UpdateUser from './screens/UpdateUser';
+import UpdateUser from './screens/UpdateUser';
 
 //Screen names
 const homeName = 'Home';
-const allCases = 'All Cases';
-const settingsName = 'Family Details';
+const allCases = 'All ';
+const settingsName = 'Add Food';
 const profile = 'Profile';
 
 const Tab = createBottomTabNavigator();

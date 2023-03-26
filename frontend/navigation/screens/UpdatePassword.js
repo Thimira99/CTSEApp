@@ -77,6 +77,10 @@ const UpdatePassword = (props) => {
 			<ScrollView>
 				<Text style={styles.title}>Update Password</Text>
 
+				<Image
+					style={styles.image}
+					source={require('../../assets/password.png')}
+				/>
 				<View style={styles.card}>
 					<Text style={styles.title2}>Email</Text>
 					<View style={styles.inputView}>
@@ -119,9 +123,9 @@ const styles = StyleSheet.create({
 		marginTop: 40,
 		justifyContent: 'center',
 		alignItems: 'center',
-		backgroundColor: '#35C953',
+		backgroundColor: '#00BFA6',
 		width: 350,
-		height: 550,
+		height: 500,
 		borderRadius: 10,
 	},
 	image: {
@@ -174,7 +178,7 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold',
 		color: '#000000',
 		textAlign: 'center',
-		marginTop: '5%',
+		marginTop: 5,
 	},
 	des: {
 		fontSize: 20,

@@ -14,6 +14,15 @@ import UpdateUser from './navigation/screens/UpdateUser';
 import ViewCase from './navigation/screens/ViewCase';
 import AssignFamily from './navigation/screens/AssignFamily';
 import UpdatePassword from './navigation/screens/UpdatePassword';
+import DetailsScreen from './navigation/screens/DetailsScreen';
+import ViewFoodsScreen from './navigation/screens/ViewFoods';
+import AFoodDetail from './navigation/screens/AFoodDetail';
+import AddFoods from './navigation/screens/SettingsScreen';
+
+import UpdateUser from './navigation/screens/UpdateUser';
+import ViewCase from './navigation/screens/ViewCase';
+import AssignFamily from './navigation/screens/AssignFamily';
+import UpdatePassword from './navigation/screens/UpdatePassword';
 
 
 import customerHome from './navigation/screens/customer screens/cusHome';
@@ -50,7 +59,10 @@ const AppNavigator = () => (
 			<Screen name='viewCase' component={ViewCase} />
 			<Screen name='assignFam' component={AssignFamily} />
 			<Screen name='updatePass' component={UpdatePassword} />
-
+			<Screen name='allUsers' component={DetailsScreen} />
+			<Screen name='viewFood' component={ViewFoodsScreen} />
+			<Screen name='oneFood' component={AFoodDetail} />
+			<Screen name='addFood' component={AddFoods} />
 
 			<Screen name='cusHome' component={customerHome} />
 			<Screen name='placeOrder' component={placeOrder} />

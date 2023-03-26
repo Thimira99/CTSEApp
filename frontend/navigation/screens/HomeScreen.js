@@ -36,7 +36,7 @@ export default function HomeScreen({ navigation }) {
 								marginTop: 17,
 							}}
 						>
-							All Cases
+							All Users
 						</Text>
 						<Text
 							style={{
@@ -60,7 +60,7 @@ export default function HomeScreen({ navigation }) {
 								marginTop: 17,
 							}}
 						>
-							All Employees
+							All Food Items
 						</Text>
 						<Text
 							style={{

@@ -16,6 +16,9 @@ export default function ViewCase(props) {
 	const route = useRoute();
 	const [data, setData] = React.useState([]);
 
+	const id = route.params.id;
+	var deleteURL = appURLs.BaseURL + `user/deleteuserById/${id}`;
+
 	React.useEffect(() => {
 		var url = appURLs.BaseURL + `user/getUser/${route.params.id}`;
 		axios.get(url).then((res) => {
@@ -53,7 +56,20 @@ export default function ViewCase(props) {
 
 						<Text style={{ fontSize: 19 }}>{data.role}</Text>
 					</View>
-					
+					<View>
+					<TouchableOpacity
+						style={styles.loginBtn}
+						onPress={() => 
+							
+							axios.delete(deleteURL).then((res) => {
+								alert("User Deleted Successfully")
+								props.navigation.navigate('allUsers')
+							})
+						}
+						>
+						<Text style={styles.loginText}>Delete User</Text>
+					</TouchableOpacity>
+					</View>
 				</View>
 			</View>
 		</ScrollView>
@@ -86,13 +102,14 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	loginBtn: {
-		backgroundColor: '#35C953',
-		width: 350,
+		backgroundColor: '#ffffff',
+		width: 300,
 		height: 50,
 		justifyContent: 'center',
 		borderRadius: 10,
 		marginBottom: 10,
 		marginTop: 10,
+		marginLeft:30
 	},
 	loginText: {
 		color: '#000000',

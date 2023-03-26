@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-
+/* eslint-disable prettier/prettier */
+import React, { useEffect, useState } from 'react';
 import {
 	StyleSheet,
 	Text,
@@ -11,15 +11,33 @@ import {
 	Alert,
 } from 'react-native';
 
-import { appURLs } from '../../enums/url';
 import axios from 'axios';
+import { appURLs } from '../../enums/url';
+import { useRoute } from '@react-navigation/native';
 
-export default function AddFoods(props) {
+
+const UpdateUser = (props) => {
+	const route = useRoute();
+
+    const id = route.params.id;
 
 	const [name, setName] = useState('');
 	const [logoUrl, setLogo] = useState('');
 	const [description, setDescription] = useState('');
 	const [quantity, setQuantity] = useState('');
+
+	const [data, setData] = useState({});
+
+	useEffect(() => {
+
+		var url = appURLs.BaseURL + `food/getAFood/${id}`;
+		axios.get(url).then((res) => {
+			setName(res.data.data[0].name);
+			setLogo(res.data.data[0].logoUrl);
+			setDescription(res.data.data[0].description);
+			setQuantity(res.data.data[0].quantity);
+		});
+	}, []);
 
 	const onChangeName = (name) => {
 		setName(name);
@@ -37,12 +55,17 @@ export default function AddFoods(props) {
 		setQuantity(quantity);
 	};
 
-	const viewFoods = () => {
-		props.navigation.navigate('viewFood');
-	}
+    const deleteFood = () => {
+        var deleteAPI = appURLs.BaseURL + `food/deleteFoodById/${id}`;
+        axios.delete(deleteAPI).then(res => {
+            alert("Deleted Successfully")
+            props.navigation.navigate('main');
+        })
+    }
+
 	//create USer
-	const addFood = () => {
-		var url =  appURLs.BaseURL + 'food/createFood';
+	const register = () => {
+		var url = appURLs.BaseURL + `food/updateFoodById/${id}`;
 		var data = {
 			name,
 			logoUrl,
@@ -55,68 +78,74 @@ export default function AddFoods(props) {
 		axios
 			.post(url, data)
 			.then((res) => {
-				props.navigation.navigate('viewFood');
+				props.navigation.navigate('addFood');
+				alert('Updated Successfully');
 			})
 			.catch((error) => {
 				alert('Not Registered');
 			});
-
-			setLogo('');
-			setName('');
-			setDescription('');
-			setQuantity('');
 	};
 
 	return (
 		<View style={styles.container}>
 			<ScrollView>
-				<Text style={styles.title}>Add a Food Item</Text>
-				<Image style={styles.Image} source={require('../../assets/food.png')} />
+				<Text style={styles.title}>Food Details</Text>
 
 				<View style={styles.card}>
+					<Text style={styles.title2}>Name</Text>
 					<View style={styles.inputView}>
 						<TextInput
 							style={styles.TextInput}
-							placeholder='Enter Food Name'
-							placeholderTextColor={'#858277'}
 							onChangeText={(name) => onChangeName(name)}
+							placeholderTextColor={'#858277'}
+							value={name}
 						/>
 					</View>
+					<Text style={styles.title2}>Logo URL</Text>
 					<View style={styles.inputView}>
 						<TextInput
 							style={styles.TextInput}
-							placeholder='Food Logo'
+							placeholder='Logo Url'
+							value={logoUrl}
 							placeholderTextColor={'#858277'}
 							onChangeText={(logoUrl) => onChangeLogo(logoUrl)}
 						/>
 					</View>
+					<Text style={styles.title2}>Description</Text>
+
 					<View style={styles.inputView}>
 						<TextInput
 							style={styles.TextInput}
+							value={description}
 							placeholder='Description'
 							placeholderTextColor={'#858277'}
 							onChangeText={(description) => onChangeDescription(description)}
 						/>
 					</View>
+					<Text style={styles.title2}>Quantity</Text>
+
 					<View style={styles.inputView}>
 						<TextInput
 							style={styles.TextInput}
 							placeholder='Quantity'
+							value={quantity}
 							placeholderTextColor={'#858277'}
 							onChangeText={(quantity) => onChangeQuantity(quantity)}
 						/>
 					</View>
+					<TouchableOpacity style={styles.registerBtn} onPress={register}>
+						<Text style={styles.loginText}>Update</Text>
+					</TouchableOpacity>
+                    <TouchableOpacity style={styles.registerBtn} onPress={deleteFood}>
+						<Text style={styles.loginText}>Delete</Text>
+					</TouchableOpacity>
 				</View>
-				<TouchableOpacity style={styles.registerBtn} onPress={addFood}>
-					<Text style={styles.loginText}>Add Now</Text>
-				</TouchableOpacity>
-				<TouchableOpacity style={styles.registerBtn} onPress={viewFoods}>
-					<Text style={styles.loginText}>View Foods</Text>
-				</TouchableOpacity>
 			</ScrollView>
 		</View>
 	);
-}
+};
+
+export default UpdateUser;
 
 const styles = StyleSheet.create({
 	container: {
@@ -127,15 +156,17 @@ const styles = StyleSheet.create({
 	},
 	card: {
 		marginTop: 40,
-		width: 350,
 		justifyContent: 'center',
 		alignItems: 'center',
-	},
-	Image: {
-		width: '100%',
-		height: '50%',
-		resizeMode: 'contain',
+		backgroundColor: '#00BFA6',
+		width: 350,
+		height: 550,
 		borderRadius: 10,
+	},
+	image: {
+		width: 150,
+		height: 150,
+		alignSelf: 'center',
 	},
 	topic: {
 		marginLeft: 100,
@@ -157,13 +188,14 @@ const styles = StyleSheet.create({
 		padding: 10,
 	},
 	registerBtn: {
-		backgroundColor: '#00BFA6',
+		backgroundColor: '#ffffff',
 		width: 300,
 		height: 50,
 		justifyContent: 'center',
 		margin: 10,
-		marginLeft: 30,
+		marginLeft: 20,
 		borderRadius: 10,
+
 	},
 	loginText: {
 		color: '#000000',
@@ -173,6 +205,13 @@ const styles = StyleSheet.create({
 	},
 	title: {
 		fontSize: 40,
+		fontWeight: 'bold',
+		color: '#000000',
+		textAlign: 'center',
+		marginTop: '5%',
+	},
+	title2: {
+		fontSize: 20,
 		fontWeight: 'bold',
 		color: '#000000',
 		textAlign: 'center',
