@@ -6,7 +6,9 @@ Restaurant Application
 
 # Technologies
 React Native
+
 Node
+
 MongoDB
 
 # GROUP ID
