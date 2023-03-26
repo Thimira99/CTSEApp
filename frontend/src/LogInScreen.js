@@ -37,7 +37,10 @@ const LogInScreen = (props) => {
 							props.navigation.navigate('main');
 							console.log('Fine')
 
-					} 
+					}  if (res.data.data[0].role === 'delivery person') {
+						props.navigation.navigate('deliveryPersonHome');
+						console.log('Fine')
+				}
 					
 					else if (res.data.data[0].role === 'customer') {
 						props.navigation.navigate('cusHome');

@@ -12,12 +12,12 @@ import { appURLs } from '../../enums/url';
 import axios from 'axios';
 import { useRoute } from '@react-navigation/native';
 
-export default function ViewOrder(props) {
+export default function ViewNote(props) {
 	const route = useRoute();
 	const [data, setData] = React.useState([]);
 
 	React.useEffect(() => {
-		var url = appURLs.BaseURL + `delivery/getOrd/${route.params.id}`;
+		var url = appURLs.BaseURL + `delivery/getNotes/${route.params.id}`;
 		axios.get(url).then((res) => {
 			setData(res.data.data[0]);
 		});
@@ -28,35 +28,30 @@ export default function ViewOrder(props) {
 			<View style={styles.container}>
 				<Image
 					style={styles.image}
-					source={require('../../assets/ord.png')}
+					source={require('../../assets/profileDetails.png')}
 				/>
-				 
 				<View style={styles.body}>
 					<View style={styles.data}>
-					 
-						<Text style={{ fontSize: 19, fontWeight: 'bold', marginLeft: 20 }}>Order Id :</Text>
+						<Text style={{ fontSize: 19, fontWeight: 'bold', marginLeft: 20 }}>Title :</Text>
 
-						<Text style={{ fontSize: 19 }}>{data.orderId}</Text>
-					</View>
-					<View style={styles.data}>
-						<Text style={{ fontSize: 19, fontWeight: 'bold', marginLeft: 20 }}>Name :</Text>
-
-						<Text style={{ fontSize: 19 }}>{data.name}</Text>
+						<Text style={{ fontSize: 19 }}>{data.title}</Text>
 					</View>
 					<View style={styles.data}>
 						<Text style={{ fontSize: 19, fontWeight: 'bold', marginLeft: 20 }}>
-							Contact Number :
+							Description :
 						</Text>
 
-						<Text style={{ fontSize: 19 }}>{data.contactNumber}</Text>
+						<Text style={{ fontSize: 19 }}>{data.description}</Text>
 					</View>
 					<View style={styles.data}>
-						<Text style={{ fontSize: 19, fontWeight: 'bold', marginLeft: 20 }}>Location :</Text>
+						<Text style={{ fontSize: 19, fontWeight: 'bold', marginLeft: 20 }}>Date :</Text>
 
-						<Text style={{ fontSize: 19 }}>{data.deliveryAddress}</Text>
+						<Text style={{ fontSize: 19 }}>{data.date}</Text>
 					</View>
 					
 				</View>
+
+                 
 			</View>
 		</ScrollView>
 	);
@@ -70,8 +65,8 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	image: {
-		width: 200,
-		height: 200,
+		width: 150,
+		height: 150,
 		marginBottom: 10,
 	},
 	body: {
@@ -86,7 +81,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'center',
 		marginBottom: 30,
-		 
+	
 	},
 	loginBtn: {
 		backgroundColor: '#35C953',

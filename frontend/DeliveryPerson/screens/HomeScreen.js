@@ -41,7 +41,7 @@ export default function HomeScreen({ navigation }) {
 						 
 						<Image
 							style={styles.cardImage1}
-							source={require('../../assets/project.png')}
+							source={require('../../assets/orders.png')}
 						/>
 					</View>
 	 
@@ -60,7 +60,7 @@ export default function HomeScreen({ navigation }) {
 						</Text>
 						<Image
 							style={styles.cardImage2}
-							source={require('../../assets/cases.png')}
+							source={require('../../assets/tracking.png')}
 						/>
 					</View>
 				</View>
@@ -74,11 +74,11 @@ export default function HomeScreen({ navigation }) {
 								marginTop: 17,
 							}}
 						>
-							Donations
+							Notes
 						</Text>
 						<Image
 							style={styles.cardImage3}
-							source={require('../../assets/donation.png')}
+							source={require('../../assets/notes.png')}
 						/>
 					</View>
 				</View>
@@ -92,11 +92,11 @@ export default function HomeScreen({ navigation }) {
 								marginTop: 17,
 							}}
 						>
-							Gramasewaka
+							Google Map
 						</Text>
 						<Image
 							style={styles.cardImage4}
-							source={require('../../assets/grama.png')}
+							source={require('../../assets/map.png')}
 						/>
 					</View>
 				</View>
@@ -111,11 +111,11 @@ export default function HomeScreen({ navigation }) {
 								marginTop: 10,
 							}}
 						>
-							Notes
+							Details
 						</Text>
 						<Image
 							style={styles.cardImage3}
-							source={require('../../assets/nutrition.png')}
+							source={require('../../assets/details.png')}
 						/>
 					</View>
 				</View>
@@ -133,7 +133,7 @@ export default function HomeScreen({ navigation }) {
 						</Text>
 						<Image
 							style={styles.cardImage2}
-							source={require('../../assets/female.png')}
+							source={require('../../assets/prof.png')}
 						/>
 					</View>
 				</View>
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
 		width: 60,
 		height: 60,
 		margin: 13,
-		backgroundColor: '#35C953',
+		backgroundColor: '#00BFA6',
 		// borderRadius: 10,
 		marginLeft: -50,
 		marginTop: 50,
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
 		width: 60,
 		height: 60,
 		margin: 13,
-		backgroundColor: '#35C953',
+		backgroundColor: '#00BFA6',
 		// borderRadius: 10,
 		marginLeft: -40,
 		marginTop: 50,
@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
 		width: 60,
 		height: 60,
 		margin: 13,
-		backgroundColor: '#35C953',
+		backgroundColor: '#00BFA6',
 		// borderRadius: 10,
 		marginLeft: -65,
 		marginTop: 50,
@@ -185,14 +185,14 @@ const styles = StyleSheet.create({
 		width: 60,
 		height: 60,
 		margin: 13,
-		backgroundColor: '#35C953',
+		backgroundColor: '#00BFA6',
 		// borderRadius: 10,
 		marginLeft: -90,
 		marginTop: 50,
 	},
 	body: {
 		marginTop: 20,
-		backgroundColor: '#35C953',
+		backgroundColor: '#00BFA6',
 		width: 150,
 		height: 150,
 		borderRadius: 10,
@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
 	body2: {
 		marginTop: -150,
 		marginLeft: 170,
-		backgroundColor: '#35C953',
+		backgroundColor: '#00BFA6',
 		width: 150,
 		height: 150,
 		borderRadius: 10,
