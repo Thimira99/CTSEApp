@@ -17,7 +17,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 // import MainContainer from '../MainContainer';
 import { useRoute } from '@react-navigation/native';
 
-const UpdateUser = (props) => {
+const updateDetails = (props) => {
 	const [firstName, setFirstName] = useState('');
 	const [email, setEmail] = useState('');
 	const [lastName, setLastName] = useState('');
@@ -202,7 +202,7 @@ const UpdateUser = (props) => {
 	);
 };
 
-export default UpdateUser;
+export default updateDetails;
 
 const styles = StyleSheet.create({
 	container: {
