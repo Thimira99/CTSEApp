@@ -31,6 +31,11 @@ const UserSchema = new mongoose.Schema({
 		required: true,
 		trim: true,
     }
+	// imgUrl2: {
+	// 	type: String,
+	// 	required: true,
+	// 	trim: true,
+    // }
 	
 });
 
