@@ -26,6 +26,15 @@ import DeliveryPersonHomePage from './DeliveryPerson/DeliveryPersonHomePage';
 import ViewOrder from './DeliveryPerson/screens/ViewOrder';
 import ViewNote from './DeliveryPerson/screens/ViewNote';
 import UpdateNote from './DeliveryPerson/screens/UpdateNote';
+import HomeScreen from './Cart/screens/HomeScreen';
+import RestaurantScreen from './Cart/screens/RestaurantScreen';
+import insertScreen from './Cart/screens/insertScreen';
+import FavList from './Cart/screens/FavList';
+import insertDishes from './Cart/screens/insertDishes';
+import insertSubDish from './Cart/screens/insertSubDish';
+import BasketScreen from './Cart/screens/BasketScreen';
+import PreparingScreen from './Cart/screens/PreparingScreen';
+import DeliveryScreen from './Cart/screens/DeliveryScreen';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -48,7 +57,7 @@ const AppNavigator = () => (
 
 			<Screen name='details' component={Details} />
 			<Screen name='updateDetails' component={updateDetails} />
-			
+
 
 
 
@@ -58,6 +67,38 @@ const AppNavigator = () => (
 			<Screen name='viewNote' component={ViewNote} />
 			<Screen name='updateNote' component={UpdateNote} />
 
+			{/* Cart */}
+
+			<Screen name="Home" component={HomeScreen} />
+			<Screen name="Restaurant" component={RestaurantScreen} />
+			<Screen name="insertPage" component={insertScreen} />
+			<Screen name="FavList" component={FavList} />
+
+			<Screen name="insertDishes" component={insertDishes} />
+			<Screen name="insertSubDish" component={insertSubDish} />
+
+			<Screen
+              name="Basket"
+              component={BasketScreen}
+              options={{
+                presentation: "modal",
+                headerShown: false,
+              }}
+            />
+            <Screen
+              name="Prepare"
+              component={PreparingScreen}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Screen
+              name="Delivery"
+              component={DeliveryScreen}
+              options={{
+                headerShown: false,
+              }}
+            />
 
 
 		</Navigator>
