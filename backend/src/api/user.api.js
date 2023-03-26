@@ -18,5 +18,8 @@ module.exports = function () {
 	//update
 	router.post('/updateuserById/:email', userController.updateUserById);
 
+	//update
+	router.delete('/deleteuserById/:id', userController.deleteUser);
+
 	return router;
 };

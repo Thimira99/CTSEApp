@@ -70,10 +70,27 @@ const updateUserById = async (req, res) => {
 	}
 };
 
+// delete note
+const deleteUser = async (req, res) => {
+	console.log(req.params.id)
+	if (req.params.id) {
+		await User.findByIdAndRemove({ _id: req.params.id })
+			.then((data) => {
+				res.status(200).send({ 
+                    message:"User removed successfully!"
+                });
+			})
+			.catch((error) => {
+				res.status(500).send({ error: error.message });
+			});
+	}
+};
+
 module.exports = {
 	createUser,
 	getUserById,
 	updateUserById,
 	getUsers,
-	getOneUser
+	getOneUser,
+	deleteUser
 };
