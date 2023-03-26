@@ -13,61 +13,57 @@ import {
 
 import axios from 'axios';
 import { appURLs } from '../../enums/url';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import MainContainer from '../MainContainer';
+import { useRoute } from '@react-navigation/native';
 
-const UpdateUser = (props) => {
-	const [name, setName] = useState('');
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-	const [contactNumber, setContactNumber] = useState('');
-	const [role, setRole] = useState('');
+const UpdateNote = (props) => {
+	const route = useRoute();
+
+    const id = route.params.id;
+
+	const [title, setTitle] = useState('');
+	const [description, setDescription] = useState('');
+	const [date, setDate] = useState('');
+	 
 
 	const [data, setData] = useState({});
-	const [eemail, setEemail] = useState();
 
 	useEffect(() => {
-		(async () => {
-			const email = await AsyncStorage.getItem('user');
-			console.log("hIII",email)
-			setEemail(email);
 
-			var url = appURLs.BaseURL + `user/userById/${email}`;
-			axios.get(url).then((res) => {
-				setPassword(res.data.data[0].password);
-				setName(res.data.data[0].name);
-				setContactNumber(res.data.data[0].contactNumber);
-				setRole(res.data.data[0].role);
-				setEmail(res.data.data[0].email);
-			});
-		})();
+		var url = appURLs.BaseURL + `delivery/getNotes/${id}`;
+		axios.get(url).then((res) => {
+			setTitle(res.data.data[0].title);
+			setDescription(res.data.data[0].description);
+			setDate(res.data.data[0].date);
+		});
 	}, []);
 
-	const onChangeName = (name) => {
-		setName(name);
+	const onChangeTitle = (title) => {
+		setTitle(title);
 	};
 
-	const onChangeEmail = (email) => {
-		setEmail(email);
+	const onChangeDescription = (description) => {
+		setDescription(description);
 	};
 
-	const onChangeContactNumber = (num) => {
-		setContactNumber(num);
+	const onChangeDate = (date) => {
+		setDate(date);
 	};
 
-	const onChangeRole = (role) => {
-		setRole(role);
-	};
+    const deleteNote = () => {
+        var deleteAPI = appURLs.BaseURL + `delivery/getNotes/delete/${id}`;
+        axios.delete(deleteAPI).then(res => {
+            alert("Deleted Successfully")
+            props.navigation.navigate('deliveryPersonHome');
+        })
+    }
 
 	//create USer
 	const register = () => {
-		var url = appURLs.BaseURL + `user/updateuserById/${eemail}`;
+		var url = appURLs.BaseURL + `delivery/getNotes/update/${id}`;
 		var data = {
-			name,
-			email,
-			password,
-			contactNumber,
-			role,
+			title,
+			description,
+			date,
 		};
 
 		console.log(data);
@@ -75,63 +71,57 @@ const UpdateUser = (props) => {
 		axios
 			.post(url, data)
 			.then((res) => {
-				props.navigation.navigate('Login');
 				alert('Updated Successfully');
+				props.navigation.navigate('main');
 			})
 			.catch((error) => {
-				alert('Not Registered');
+				alert('Updated Successfully');
 			});
 	};
 
 	return (
 		<View style={styles.container}>
 			<ScrollView>
-				<Text style={styles.title}>Update Profile</Text>
+				<Text style={styles.title}>Update Note</Text>
 
 				<View style={styles.card}>
-					<Text style={styles.title2}>Name</Text>
+                <Text style={styles.title2}>Title</Text>
 					<View style={styles.inputView}>
 						<TextInput
 							style={styles.TextInput}
-							onChangeText={(name) => onChangeName(name)}
+							placeholder='Title'
+							value={title}
 							placeholderTextColor={'#858277'}
-							value={name}
+							onChangeText={(title) => onChangeTitle(title)}
 						/>
 					</View>
-					<Text style={styles.title2}>Email</Text>
+					<Text style={styles.title2}>Description</Text>
 					<View style={styles.inputView}>
 						<TextInput
 							style={styles.TextInput}
-							placeholder='User Email'
-							value={email}
+							placeholder='Description'
+							value={description}
 							placeholderTextColor={'#858277'}
-							onChangeText={(email) => setEmail(email)}
+							onChangeText={(description) => onChangeDescription(description)}
 						/>
 					</View>
-					<Text style={styles.title2}>Contact Number</Text>
 
+                    <Text style={styles.title2}>Date</Text>
 					<View style={styles.inputView}>
 						<TextInput
 							style={styles.TextInput}
-							value={contactNumber}
-							placeholder='Contact Number'
+							placeholder='Date'
+							value={date}
 							placeholderTextColor={'#858277'}
-							onChangeText={(num) => setContactNumber(num)}
+							onChangeText={(date) => onChangeDate(date)}
 						/>
 					</View>
-					<Text style={styles.title2}>Role</Text>
-
-					<View style={styles.inputView}>
-						<TextInput
-							style={styles.TextInput}
-							placeholder='User Role'
-							value={role}
-							placeholderTextColor={'#858277'}
-							onChangeText={(role) => setRole(role)}
-						/>
-					</View>
+					 
 					<TouchableOpacity style={styles.registerBtn} onPress={register}>
 						<Text style={styles.loginText}>Update</Text>
+					</TouchableOpacity>
+					<TouchableOpacity style={styles.deleteBtn} onPress={deleteNote}>
+						<Text style={styles.loginText}>Delete</Text>
 					</TouchableOpacity>
 				</View>
 			</ScrollView>
@@ -139,7 +129,8 @@ const UpdateUser = (props) => {
 	);
 };
 
-export default UpdateUser;
+export default UpdateNote;
+
 
 const styles = StyleSheet.create({
 	container: {
@@ -152,7 +143,7 @@ const styles = StyleSheet.create({
 		marginTop: 40,
 		justifyContent: 'center',
 		alignItems: 'center',
-		backgroundColor: '#35C953',
+		backgroundColor: '#00BFA6',
 		width: 350,
 		height: 550,
 		borderRadius: 10,
@@ -182,7 +173,16 @@ const styles = StyleSheet.create({
 		padding: 10,
 	},
 	registerBtn: {
-		backgroundColor: '#ffffff',
+		backgroundColor: '#52F7E1',
+		width: 300,
+		height: 50,
+		justifyContent: 'center',
+		margin: 10,
+		marginLeft: 20,
+		color: '#ffffff'
+	},
+	deleteBtn: {
+		backgroundColor: '#EF484B',
 		width: 300,
 		height: 50,
 		justifyContent: 'center',

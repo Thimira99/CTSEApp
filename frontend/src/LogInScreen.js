@@ -28,7 +28,7 @@ const LogInScreen = (props) => {
 				.then(async (res) => {
 					console.log(res.data.data[0]);
 					await AsyncStorage.setItem('user', res.data.data[0].email);
-
+					
 					if (
 						res.data.data[0].email === email &&
 						res.data.data[0].password === password
@@ -130,18 +130,20 @@ const styles = StyleSheet.create({
 		marginBottom: 30,
 	},
 	inputView: {
-		backgroundColor: '#E8E8E8',
-		borderRadius: 15,
 		width: '70%',
 		height: 45,
 		marginBottom: 20,
-
+		backgroundColor: '#E8E8E8',
+		borderRadius: 15,
 		alignItems: 'center',
+
 	},
 	TextInput: {
-		height: 50,
 		flex: 1,
 		color: '#000000',
+		height: 50,
+		marginLeft: 15,
+		padding: 10,
 	},
 	passwordInput: {
 		marginTop:13,

@@ -18,6 +18,8 @@ import UpdatePassword from './navigation/screens/UpdatePassword';
 //delivery person
 import DeliveryPersonHomePage from './DeliveryPerson/DeliveryPersonHomePage';
 import ViewOrder from './DeliveryPerson/screens/ViewOrder';
+import ViewNote from './DeliveryPerson/screens/ViewNote';
+import UpdateNote from './DeliveryPerson/screens/UpdateNote';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -38,6 +40,8 @@ const AppNavigator = () => (
 			{/* delivery person */}
 			<Screen name='deliveryPersonHome' component={DeliveryPersonHomePage} />
 			<Screen name='viewOrder' component={ViewOrder} />
+			<Screen name='viewNote' component={ViewNote} />
+			<Screen name='updateNote' component={UpdateNote} />
 
 		</Navigator>
 	</NavigationContainer>

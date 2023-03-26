@@ -42,6 +42,20 @@ const getOneNote = async (req, res) => {
 			});
 	}
 };
+ 
+
+// Get note by title
+const getNoteByTitle = async (req, res) => {
+	if (req.params.title) {
+		await Note.find({ title: req.params.title })
+			.then((data) => {
+				res.status(200).send({ data: data });
+			})
+			.catch((error) => {
+				res.status(500).send({ error: error.message });
+			});
+	}
+};
 
 
 // update note
@@ -79,6 +93,7 @@ module.exports = {
 	createNote,
     getNotes,
 	getOneNote,
+	getNoteByTitle,
 	updateNote,
     deleteNote
 	 
