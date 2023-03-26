@@ -48,23 +48,9 @@ export default function ProfileScreen(props) {
 				</Text>
 				<Image
 					style={styles.image}
-					source={require('../../assets/profile.png')}
+					source={require('../../assets/pro.png')}
 				/>
 				<View style={styles.body}>
-					<Text
-						style={[
-							styles.btnTxt,
-							{
-								color: '#0C1446',
-								marginBottom: 40,
-								fontSize: 26,
-								marginLeft: 120,
-								fontWeight: 'bold',
-							},
-						]}
-					>
-						My Profile
-					</Text>
 					<View style={styles.data}>
 						<Text style={{ fontSize: 19, fontWeight: 'bold' }}>Name :</Text>
 
@@ -117,24 +103,26 @@ const styles = StyleSheet.create({
 		marginBottom: 10,
 	},
 	body: {
-		backgroundColor: '#35C953',
+		backgroundColor: '#00BFA6',
 		width: 350,
 		height: 430,
 		borderRadius: 10,
 	},
 	data: {
+		marginTop:40,
+		marginLeft:30,
 		flexDirection: 'row',
 		alignItems: 'center',
-		marginBottom: 30,
 	},
 	loginBtn: {
+		marginTop:20,
 		backgroundColor: '#ffffff',
 		width: 300,
 		height: 50,
 		justifyContent: 'center',
 		borderRadius: 10,
 		marginLeft: 30,
-		marginBottom: 10,
+		marginBottom: 5,
 	},
 	loginText: {
 		color: '#000000',

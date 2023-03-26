@@ -6,6 +6,7 @@ import {
 	ScrollView,
 	FlatList,
 	TouchableOpacity,
+    Image
 } from 'react-native';
 
 import { appURLs } from '../../enums/url';
@@ -13,20 +14,21 @@ import axios from 'axios';
 
 export default function DetailsScreen(props) {
 	const [data, setData] = React.useState([]);
-
+	
 	React.useEffect(() => {
-		var url = appURLs.BaseURL + `user/getUsers`;
+		var url = appURLs.BaseURL + `food/getFoods`;
 			axios.get(url).then((res) => {
 				console.log(res.data.users);
 				setData(res.data.users);
 			});
 	}, []);
 
+
 	return (
 		<View style={styles.container}>
 			<ScrollView>
 				<View style={styles.header}>
-					<Text style={styles.headerTxt}>All Users</Text>
+					<Text style={styles.headerTxt}>All Foods</Text>
 					<FlatList
 						style={styles.notificationList}
 						data={data}
@@ -64,15 +66,18 @@ export default function DetailsScreen(props) {
 														marginTop: 10,
 													},
 												]}
-											><Text style={styles.emailText}>Email : </Text>
-												{item.email}
+											>
+												<Image
+							                        style={styles.cardImage2}
+							                        source={{uri:item.logoUrl}}
+						                        />
 											</Text>
 
 											<View style={styles.cardData}>
 												<TouchableOpacity
 													style={styles.loginBtn}
 													onPress={() =>
-														props.navigation.navigate('viewCase', {
+														props.navigation.navigate('oneFood', {
 															id: item._id,
 														})
 													}
@@ -104,9 +109,15 @@ const styles = StyleSheet.create({
 		padding: 5,
 	},
 	cardData: {
+		marginLeft:8,
 		flexDirection: 'row',
 		marginTop: 20,
 	},
+    cardImage2:{
+        marginLeft:55,
+        width:120,
+        height:120
+    },
 	title: {
 		color: '#000000',
 		fontSize: 18,
