@@ -28,7 +28,7 @@ export default function DetailsScreen(props) {
 		<View style={styles.container}>
 			<ScrollView>
 				<View style={styles.header}>
-					<Text style={styles.headerTxt}>All Foods</Text>
+					<Text style={styles.headerTxt}>All Favourites</Text>
 					<FlatList
 						style={styles.notificationList}
 						data={data}

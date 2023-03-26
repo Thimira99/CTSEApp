@@ -8,7 +8,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 const SplashScreen = (props) => {
 	return (
 		<View style={styles.container}>
-			<Image style={styles.Image} source={require('../assets/home.png')} />
+			<Image style={styles.Image} source={require('../assets/home2.jpg')} />
 			<Text style={styles.title}>Lets get started</Text>
 			<Text style={styles.des}>
 				Be the reason someone smiles today! Together.
