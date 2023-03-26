@@ -99,8 +99,8 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	image: {
-		width: 150,
-		height: 150,
+		width: 170,
+		height: 170,
 		marginBottom: 10,
 	},
 	body: {
