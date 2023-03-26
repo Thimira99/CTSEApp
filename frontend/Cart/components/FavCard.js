@@ -18,19 +18,19 @@ export default function FavCard({
   const navigation = useNavigation();
   return (
     <TouchableOpacity
-      onPress={() => {
-        navigation.navigate("Restaurant", {
-            idoftheDish,
-            imgUrl,
-            title,
-            genre,
-            address,
-            short_description,
+      // onPress={() => {
+      //   navigation.navigate("Restaurant", {
+      //       idoftheDish,
+      //       imgUrl,
+      //       title,
+      //       genre,
+      //       address,
+      //       short_description,
             
        
-        });
-      }}
-      className="bg-white mb-5 shadow-md rounded-sm"
+      //   });
+      // }}
+      // className="bg-white mb-5 shadow-md rounded-sm"
     >
       <Image
         source={{

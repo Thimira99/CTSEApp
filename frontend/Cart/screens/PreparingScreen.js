@@ -13,7 +13,7 @@ const PreparingScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView className="bg-[#00ccbb] flex-1 justify-center items-center">
-      <Animatable.Image
+      {/* <Animatable.Image
         source={require("./assets/delivery-boy.gif")}
         animation="slideInUp"
         iterationCount={1}
@@ -28,7 +28,7 @@ const PreparingScreen = ({ navigation }) => {
         Assigning Delivery partner to your order
       </Animatable.Text>
 
-      <Progress.Circle size={60} indeterminate={true} color="white" />
+      <Progress.Circle size={60} indeterminate={true} color="white" /> */}
     </SafeAreaView>
   );
 };
