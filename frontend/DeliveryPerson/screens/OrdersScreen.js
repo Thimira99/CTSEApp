@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		flexDirection: 'column',
 		width: 320,
-		backgroundColor: '#35C953',
+		backgroundColor: '#00BFA6',
 		margin: 10,
 		padding: 20,
 		borderRadius: 15,

@@ -22,11 +22,14 @@ module.exports = function () {
 	//get single note route
  	router.get('/getNotes/:id', noteController.getOneNote);
 
+	//get single note by title route
+	router.get('/getNotes/:title', noteController.getNoteByTitle);
+
 	//update note route
-	router.put('/getNotes/:id', noteController.updateNote);
+	router.put('/getNotes/update/:id', noteController.updateNote);
 
 	//delete note route
-	router.delete('/getNotes/:id', noteController.deleteNote);
+	router.delete('/getNotes/delete/:id', noteController.deleteNote);
 
 	return router;
 };

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
 	View,
 	Text,
@@ -10,23 +10,27 @@ import {
 
 import { appURLs } from '../../enums/url';
 import axios from 'axios';
+ 
 
 export default function DetailsScreen(props) {
+	 
 	const [data, setData] = React.useState([]);
+	 
 
 	React.useEffect(() => {
-		var url = appURLs.BaseURL + `user/getUsers`;
+		var url = appURLs.BaseURL + `delivery/getNotes`;
 			axios.get(url).then((res) => {
-				console.log(res.data.users);
-				setData(res.data.users);
+				console.log(res.data.notes);
+				setData(res.data.notes);
 			});
 	}, []);
 
+	 
 	return (
 		<View style={styles.container}>
 			<ScrollView>
 				<View style={styles.header}>
-					<Text style={styles.headerTxt}>All Cases</Text>
+					<Text style={styles.headerTxt}>Delivery Notes</Text>
 					<FlatList
 						style={styles.notificationList}
 						data={data}
@@ -50,35 +54,38 @@ export default function DetailsScreen(props) {
 														marginTop: -20,
 													},
 												]}
-											><Text style={styles.nameText}>Name : </Text>
-												{item.name}
+											><Text style={styles.nameText}>Title : </Text>
+												{item.title}
 											</Text>
-											<Text
-												style={[
-													styles.txt,
-													{
-														marginLeft: 35,
-														color: '#000000',
-														fontSize: 20,
-														fontWeight: 'bold',
-														marginTop: 10,
-													},
-												]}
-											><Text style={styles.emailText}>Email : </Text>
-												{item.email}
-											</Text>
-
+	
+										 
+											 
 											<View style={styles.cardData}>
 												<TouchableOpacity
 													style={styles.loginBtn}
 													onPress={() =>
-														props.navigation.navigate('viewCase', {
+														props.navigation.navigate('viewNote', {
 															id: item._id,
 														})
 													}
 												>
 													<Text style={styles.loginText}>View</Text>
 												</TouchableOpacity>
+											</View>
+
+											<View style={styles.cardData}>
+												<TouchableOpacity
+													style={styles.loginBtn}
+													onPress={() =>
+														props.navigation.navigate('updateNote', {
+															id: item._id,
+														})
+													}
+												>
+													<Text style={styles.loginText}>Update</Text>
+												</TouchableOpacity>
+												 
+												 
 											</View>
 										</View>
 									</View>
@@ -131,7 +138,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		flexDirection: 'column',
 		width: 320,
-		backgroundColor: '#35C953',
+		backgroundColor: '#00BFA6',
 		margin: 10,
 		padding: 20,
 		borderRadius: 15,
